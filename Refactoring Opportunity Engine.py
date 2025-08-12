@@ -1,7 +1,8 @@
 
 import streamlit as st
 import pandas as pd
-import plotly.express as px
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 # Set the title of the Streamlit app
 st.title("SQL Anti-Pattern Detection Dashboard")
@@ -21,19 +22,19 @@ df = pd.DataFrame(data)
 st.subheader("Detected Anti-Patterns and Recommendations")
 st.dataframe(df)
 
-# Create a scatter plot for effort vs impact
-fig_scatter = px.scatter(df, x='Effort', y='Impact', text='Anti-Pattern',
-                         color='Recommendation', size=[10]*len(df),
-                         labels={'Effort': 'Effort Score', 'Impact': 'Impact Score'},
-                         title='Effort vs Impact of Recommendations')
+# Scatter plot: Effort vs Impact
+st.subheader("Effort vs Impact of Recommendations")
+fig1, ax1 = plt.subplots()
+sns.scatterplot(data=df, x='Effort', y='Impact', hue='Recommendation', s=100, ax=ax1)
+for i in range(len(df)):
+    ax1.text(df['Effort'][i]+0.05, df['Impact'][i], df['Anti-Pattern'][i], fontsize=9)
+ax1.set_xlabel('Effort Score')
+ax1.set_ylabel('Impact Score')
+st.pyplot(fig1)
 
-# Show the scatter plot
-st.plotly_chart(fig_scatter)
-
-# Create a bar chart for impact scores
-fig_bar = px.bar(df, x='Anti-Pattern', y='Impact', color='Effort',
-                 labels={'Impact': 'Impact Score', 'Effort': 'Effort Score'},
-                 title='Impact of Anti-Patterns')
-
-# Show the bar chart
-st.plotly_chart(fig_bar)
+# Bar chart: Impact of Anti-Patterns
+st.subheader("Impact of Anti-Patterns")
+fig2, ax2 = plt.subplots()
+sns.barplot(data=df, x='Anti-Pattern', y='Impact', hue='Effort', ax=ax2)
+ax2.set_ylabel('Impact Score')
+st.pyplot(fig2)
