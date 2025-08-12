@@ -36,7 +36,7 @@ st.dataframe(filtered_df, use_container_width=True)
 
 # Bar chart: Frequency of anti-patterns
 st.subheader("📊 Frequency of Anti-Patterns")
-if not filtered_df.empty:
+if not filtered_df.empty and "Anti_Pattern" in filtered_df.columns:
     fig_freq = px.bar(
         filtered_df,
         x="Anti_Pattern",
@@ -46,11 +46,11 @@ if not filtered_df.empty:
     )
     st.plotly_chart(fig_freq, use_container_width=True)
 else:
-    st.warning("No data available for the selected severity levels.")
+    st.warning("No data available or column 'Anti_Pattern' missing.")
 
 # Pie chart: Severity distribution
 st.subheader("🧮 Severity Distribution")
-if not filtered_df.empty:
+if not filtered_df.empty and "Severity" in filtered_df.columns:
     severity_counts = filtered_df["Severity"].value_counts().reset_index()
     severity_counts.columns = ["Severity", "Count"]
     fig_severity = px.pie(
