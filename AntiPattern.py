@@ -3,13 +3,13 @@ import pandas as pd
 
 # Sample data representing SQL anti-patterns in Snowflake
 data = [
-    {"Anti-Pattern": "SELECT *", "Description": "Fetches all columns, increasing compute and storage costs.", "Severity": "High", "Frequency": 45},
-    {"Anti-Pattern": "JOIN Explosion", "Description": "Poor join logic leads to massive intermediate datasets.", "Severity": "High", "Frequency": 30},
-    {"Anti-Pattern": "COUNT(*) in Outer Joins", "Description": "Misleading counts due to NULLs.", "Severity": "Medium", "Frequency": 25},
-    {"Anti-Pattern": "Scalar Subqueries in SELECT", "Description": "Reduces readability and performance.", "Severity": "Medium", "Frequency": 20},
-    {"Anti-Pattern": "Filtering on Non-Preserved Side of OUTER JOIN", "Description": "Converts OUTER JOIN to INNER JOIN unintentionally.", "Severity": "Medium", "Frequency": 15},
-    {"Anti-Pattern": "Using Cursors Instead of Set-Based Operations", "Description": "Inefficient and slow.", "Severity": "High", "Frequency": 10},
-    {"Anti-Pattern": "Hardcoding Values", "Description": "Reduces flexibility and increases risk.", "Severity": "Low", "Frequency": 35},
+    {"Anti_Pattern": "SELECT *", "Description": "Fetches all columns, increasing compute and storage costs.", "Severity": "High", "Frequency": 45},
+    {"Anti_Pattern": "JOIN Explosion", "Description": "Poor join logic leads to massive intermediate datasets.", "Severity": "High", "Frequency": 30},
+    {"Anti_Pattern": "COUNT(*) in Outer Joins", "Description": "Misleading counts due to NULLs.", "Severity": "Medium", "Frequency": 25},
+    {"Anti_Pattern": "Scalar Subqueries in SELECT", "Description": "Reduces readability and performance.", "Severity": "Medium", "Frequency": 20},
+    {"Anti_Pattern": "Filtering on Non-Preserved Side of OUTER JOIN", "Description": "Converts OUTER JOIN to INNER JOIN unintentionally.", "Severity": "Medium", "Frequency": 15},
+    {"Anti_Pattern": "Using Cursors Instead of Set-Based Operations", "Description": "Inefficient and slow.", "Severity": "High", "Frequency": 10},
+    {"Anti_Pattern": "Hardcoding Values", "Description": "Reduces flexibility and increases risk.", "Severity": "Low", "Frequency": 35},
 ]
 
 # Convert to DataFrame
