@@ -15,30 +15,50 @@ data = [
 # Convert to DataFrame
 df = pd.DataFrame(data)
 
-# Streamlit UI
+# Streamlit UI setup
 st.set_page_config(page_title="Snowflake SQL Anti-Patterns Dashboard", layout="wide")
-
 st.title("❄️ Snowflake SQL Anti-Patterns Dashboard")
 
 # Sidebar filters
 st.sidebar.header("Filter Options")
-severity_filter = st.sidebar.multiselect("Select Severity Level", options=df["Severity"].unique(), default=df["Severity"].unique())
+severity_filter = st.sidebar.multiselect(
+    "Select Severity Level",
+    options=df["Severity"].unique(),
+    default=df["Severity"].unique()
+)
 
 # Filter data based on selection
 filtered_df = df[df["Severity"].isin(severity_filter)]
 
-# Display table of anti-patterns
+# Display table
 st.subheader("📋 Anti-Patterns Table")
 st.dataframe(filtered_df, use_container_width=True)
 
 # Bar chart: Frequency of anti-patterns
 st.subheader("📊 Frequency of Anti-Patterns")
-fig_freq = px.bar(filtered_df, x="Anti_Pattern", y="Frequency", color="Severity", title="Frequency by Anti-Pattern")
-st.plotly_chart(fig_freq, use_container_width=True)
+if not filtered_df.empty:
+    fig_freq = px.bar(
+        filtered_df,
+        x="Anti_Pattern",
+        y="Frequency",
+        color="Severity",
+        title="Frequency by Anti-Pattern"
+    )
+    st.plotly_chart(fig_freq, use_container_width=True)
+else:
+    st.warning("No data available for the selected severity levels.")
 
-# Pie chart: Distribution by severity
+# Pie chart: Severity distribution
 st.subheader("🧮 Severity Distribution")
-severity_counts = filtered_df["Severity"].value_counts().reset_index()
-severity_counts.columns = ["Severity", "Count"]
-fig_severity = px.pie(severity_counts, names="Severity", values="Count", title="Severity Distribution")
-st.plotly_chart(fig_severity, use_container_width=True)
+if not filtered_df.empty:
+    severity_counts = filtered_df["Severity"].value_counts().reset_index()
+    severity_counts.columns = ["Severity", "Count"]
+    fig_severity = px.pie(
+        severity_counts,
+        names="Severity",
+        values="Count",
+        title="Severity Distribution"
+    )
+    st.plotly_chart(fig_severity, use_container_width=True)
+else:
+    st.warning("No severity data available for the selected filters.")
