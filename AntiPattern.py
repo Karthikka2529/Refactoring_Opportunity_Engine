@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import plotly.express as px
 
 # Sample data representing SQL anti-patterns in Snowflake
 data = [
@@ -32,25 +33,14 @@ st.subheader("📋 Anti-Patterns Table")
 st.dataframe(filtered_df, use_container_width=True)
 
 # Bar chart: Frequency of anti-patterns
-#st.subheader("📊 Frequency of Anti-Patterns")
-#fig_freq = px.bar(filtered_df, x="Anti-Pattern", y="Frequency", color="Severity", title="Frequency by Anti-Pattern")
-#st.plotly_chart(fig_freq, use_container_width=True)
+st.subheader("📊 Frequency of Anti-Patterns")
+fig_freq = px.bar(filtered_df, x="Anti-Pattern", y="Frequency", color="Severity", title="Frequency by Anti-Pattern")
+st.plotly_chart(fig_freq, use_container_width=True)
 
 # Pie chart: Distribution by severity
-#st.subheader("🧮 Severity Distribution")
-#severity_counts = filtered_df["Severity"].value_counts().reset_index()
-#severity_counts.columns = ["Severity", "Count"]
-#fig_severity = px.pie(severity_counts, names="Severity", values="Count", title="Severity Distribution")
-#st.plotly_chart(fig_severity, use_container_width=True)
+st.subheader("🧮 Severity Distribution")
+severity_counts = filtered_df["Severity"].value_counts().reset_index()
+severity_counts.columns = ["Severity", "Count"]
+fig_severity = px.pie(severity_counts, names="Severity", values="Count", title="Severity Distribution")
+st.plotly_chart(fig_severity, use_container_width=True)
 
-# Display bar chart for Effort scores
-st.subheader("Effort Scores")
-effort_chart_data = pd.DataFrame({'Anti-Pattern': df['Anti-Pattern'], 'Effort': df['Effort']})
-effort_chart_data.set_index('Anti-Pattern', inplace=True)
-st.bar_chart(effort_chart_data)
-
-# Display bar chart for Impact scores
-st.subheader("Impact Scores")
-impact_chart_data = pd.DataFrame({'Anti-Pattern': df['Anti-Pattern'], 'Impact': df['Impact']})
-impact_chart_data.set_index('Anti-Pattern', inplace=True)
-st.bar_chart(impact_chart_data)
