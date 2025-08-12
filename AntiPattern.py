@@ -43,4 +43,3 @@ severity_counts = filtered_df["Severity"].value_counts().reset_index()
 severity_counts.columns = ["Severity", "Count"]
 fig_severity = px.pie(severity_counts, names="Severity", values="Count", title="Severity Distribution")
 st.plotly_chart(fig_severity, use_container_width=True)
-
