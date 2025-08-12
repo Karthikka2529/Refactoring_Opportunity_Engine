@@ -37,8 +37,20 @@ st.dataframe(filtered_df, use_container_width=True)
 #st.plotly_chart(fig_freq, use_container_width=True)
 
 # Pie chart: Distribution by severity
-st.subheader("🧮 Severity Distribution")
-severity_counts = filtered_df["Severity"].value_counts().reset_index()
-severity_counts.columns = ["Severity", "Count"]
-fig_severity = px.pie(severity_counts, names="Severity", values="Count", title="Severity Distribution")
-st.plotly_chart(fig_severity, use_container_width=True)
+#st.subheader("🧮 Severity Distribution")
+#severity_counts = filtered_df["Severity"].value_counts().reset_index()
+#severity_counts.columns = ["Severity", "Count"]
+#fig_severity = px.pie(severity_counts, names="Severity", values="Count", title="Severity Distribution")
+#st.plotly_chart(fig_severity, use_container_width=True)
+
+# Display bar chart for Effort scores
+st.subheader("Effort Scores")
+effort_chart_data = pd.DataFrame({'Anti-Pattern': df['Anti-Pattern'], 'Effort': df['Effort']})
+effort_chart_data.set_index('Anti-Pattern', inplace=True)
+st.bar_chart(effort_chart_data)
+
+# Display bar chart for Impact scores
+st.subheader("Impact Scores")
+impact_chart_data = pd.DataFrame({'Anti-Pattern': df['Anti-Pattern'], 'Impact': df['Impact']})
+impact_chart_data.set_index('Anti-Pattern', inplace=True)
+st.bar_chart(impact_chart_data)
