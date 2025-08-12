@@ -32,9 +32,9 @@ st.subheader("📋 Anti-Patterns Table")
 st.dataframe(filtered_df, use_container_width=True)
 
 # Bar chart: Frequency of anti-patterns
-st.subheader("📊 Frequency of Anti-Patterns")
-fig_freq = px.bar(filtered_df, x="Anti-Pattern", y="Frequency", color="Severity", title="Frequency by Anti-Pattern")
-st.plotly_chart(fig_freq, use_container_width=True)
+#st.subheader("📊 Frequency of Anti-Patterns")
+#fig_freq = px.bar(filtered_df, x="Anti-Pattern", y="Frequency", color="Severity", title="Frequency by Anti-Pattern")
+#st.plotly_chart(fig_freq, use_container_width=True)
 
 # Pie chart: Distribution by severity
 st.subheader("🧮 Severity Distribution")
